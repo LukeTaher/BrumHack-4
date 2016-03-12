@@ -95,9 +95,9 @@
         }
       }
 
-      var totalString = [];
+      var totalString = [], totalString2 = [];
       totalString.push("public static int[] sort(int[] array) {");
-      var highlights = ["boolean", "byte", "char", "double", "float","int","long","short", 
+      var highlights = ["boolean", "byte", "char", "double", "float","int","long","short",
         "String", "if", "while", "for", "break", "else", "switch", "case", "true", "false", "(int"];
       var theirString = [];
       theirString.push("public static int[] sort(int[] a) {");
@@ -110,7 +110,7 @@
       function game(){
         context.clearRect(0, 0, c.width, c.height);
         context.fillStyle = '#f2f2f2';
-        context.fillRect(0, 0, width, height);        
+        context.fillRect(0, 0, width, height);
         context.fillStyle = getRandomColor();
         context.font = "20px Arial";
         var x = 10;
@@ -159,7 +159,7 @@
               context.fillStyle = "#444";
             }
             context.fillText(words[j], xVal, y + (i*lineheight) );
-            xVal += context.measureText(words[j]+" ").width; 
+            xVal += context.measureText(words[j]+" ").width;
           }
         }
       }
@@ -187,15 +187,17 @@
           return color;
       }
 
+      // Send an HTTP post request to the server
       function sendRequest(data, callback) {
           $.ajax({
               type: "POST",
-              url: "pending",
+              url: "http://188.166.145.0/test.html",
               data: data,
               success: callback
           });
       }
 
+      // Send the source code to the server
       function sendSource(src, user, otherUser, callback) {
           sendRequest({
               "raw": src,
@@ -207,7 +209,7 @@
       $(function(){
        $("#text").keypress(function (e) {
           if (e.keyCode == 13) {
-             totalString.push($('#text').html().substring(0, $('#text').html().length-4)); 
+             totalString.push($('#text').html().substring(0, $('#text').html().length-4));
              $("#text").empty();
           }
         });
@@ -225,12 +227,54 @@
 
       myVar = setInterval(game, 50);
 
+      // Send the player's source code to the server every second
       srcSendLoop = setInterval(function() {
           sendSource(totalString.join("\n"), thisUser, otherUser, applyDisruptions);
       }, 1000);
 
-      function applyDisruptions(src) {
+      // Appl the disruptions from the server to the source code
+      function applyDisruptions(str) {
+          var json = JSON.parse(str);
+          var src = json[0];
+          var disruption = json[1];
+          var opponent = json[2];
+          var opponentSrc = opponent[0];
+          var opponentDisruption = opponent[1];
+          switch(disruption) {
+              case 1:
+              // Replace variable names
+                src = replaceVarNames(src);
+                break;
+              case 2:
+                // cover screen
+              case 4:
+              // Play obnoxious music
+                var audio = new Audio('dankstorm.mp3');
+                audio.play();
+                break;
+              case 5:
+                // i = 0
+          }
+
+          switch(opponentDisruption) {
+              case 1:
+                opponentSrc = replaceVarNames(opponentSrc);
+                break;
+              case 5:
+                // i = 0
+          }
+
           totalString = src.split("\n");
+          totalString2 = opponentSrc.split("\n");
+      }
+
+      function replaceVarNames(src) {
+          var varDec = src.match("[a-zA-Z]+ [a-zA-Z]+ = .+").split(" ");
+          var varName = varDec[1];
+          if(varName != "") {
+              return src.replace(varName, "denkMames");
+          }
+          return src;
       }
 
     </script>

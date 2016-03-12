@@ -94,13 +94,15 @@
 
       var totalString = [];
       totalString.push("public static int[] sort(int[] array) {");
+      var highlights = ["boolean", "byte", "char", "double", "float","int","long","short", 
+        "String", "if", "while", "for", "break", "else", "switch", "case", "true", "false"];
 
       function game(){
         context.clearRect(0, 0, c.width, c.height);
-        context.fillStyle = '#eeeeee';
+        context.fillStyle = '#f2f2f2';
         context.fillRect(0, 0, width, height);
         
-        context.fillStyle = getRandomColor();
+        context.fillStyle = "#444";
         context.font = "20px Arial";
         var x = 10;
         var y = 30;
@@ -110,7 +112,20 @@
         y += 5;
 
         for (var i = 1; i<totalString.length; i++) {
-            context.fillText(totalString[i], x, y + (i*lineheight) );
+          x = 40;
+         words = totalString[i].split(" ");
+          //alert(words);
+          for (var j = 0; j < words.length; j++) {
+            if (contains(highlights, words[j])) {
+              context.fillStyle = getRandomColor();
+            }
+            else {
+              context.fillStyle = "#444";
+            }
+            context.fillText(words[j], x, y + (i*lineheight) );
+            x += context.measureText(words[j]+" ").width; 
+          }
+          //context.fillText(totalString[i], x, y + (i*lineheight) );
         }
 
       }
@@ -141,22 +156,32 @@
       $(function(){
        $("#text").keypress(function (e) {
           if (e.keyCode == 13) {
-             totalString.push("           " + $('#text').html().substring(0, $('#text').html().length-4)); 
+             totalString.push($('#text').html().substring(0, $('#text').html().length-4)); 
              $("#text").empty();
           }
         });
       });
 
-      myVar = setInterval(game, 20);
+    function contains(a, obj) {
+      var i = a.length;
+      while (i--) {
+         if (a[i] == obj) {
+            return true;
+         }
+      }
+      return false;
+    }
+
+      myVar = setInterval(game, 50);
 
     </script>
      <div style="width:100%">
         <div style="width:50%; top:0px;float:left;">
-          <div> <h4> You </h4></div>
+          <div onClick="this.contentEditable='true';" style="width:50%; top:0px;float;"><h2>You</h2></div>
           <div id="text" onClick="this.contentEditable='true';">lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor</div>
         </div>
         <div style="width:50%; top:0px;float:left;">
-          <div> <h4> Them </h4></div>
+          <div onClick="this.contentEditable='false';" style="width:50%; top:0px;float;"><h2>Them<h2></div>
           <div onClick="this.contentEditable='false';">
             lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor
           </div>

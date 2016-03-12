@@ -158,7 +158,7 @@
               type: "POST",
               url: "pending",
               data: data,
-              success: callback
+              success: callback#
           });
       }
 
@@ -202,12 +202,12 @@
     </script>
      <div style="width:100%">
         <div style="width:50%; top:0px;float:left;">
-          <div onClick="this.contentEditable='true';" style="width:50%; top:0px;float;"><h2>You</h2></div>
+          <div id= "myName" onClick="this.contentEditable='true';" style="width:50%; top:0px;float;"><h2>You</h2></div>
           <div id="text" onClick="this.contentEditable='true';">lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor</div>
         </div>
         <div style="width:50%; top:0px;float:left;">
-          <div onClick="this.contentEditable='false';" style="width:50%; top:0px;float;"><h2>Them<h2></div>
-          <div onClick="this.contentEditable='false';">
+          <div id= "theirName"onClick="this.contentEditable='false';" style="width:50%; top:0px;float;"><h2>Them<h2></div>
+          <div id="theirText" onClick="this.contentEditable='false';">
             lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor
           </div>
         </div>

@@ -17,10 +17,10 @@
           var M= ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
           if(M && (tem= ua.match(/version\/([\.\d]+)/i))!= null) M[2]= tem[1];
           M= M? [M[1], M[2]]: [N, navigator.appVersion, '-?'];
-       
+
           return M;
       })();
-       
+
       var browser;
       if (navigator.sayswho[0] == "Firefox")
         browser="f";
@@ -56,7 +56,7 @@
       var mouseClicked = false;
 
       function canvasClick(event)
-      { 
+      {
         if (mouseClicked) {
           mouseClicked = !mouseClicked;
           if (browser == "f" || browser == "m") {
@@ -78,10 +78,10 @@
             mouseY = event.clientY - c.offsetTop + document.body.scrollTop;
           }
         }
-      } 
+      }
 
       function onMouseUpdate(event)
-      { 
+      {
         if (browser == "f" || browser == "m") {
           var newMouseX = event.clientX - c.offsetLeft + document.documentElement.scrollLeft;
           var newMouseY = event.clientY - c.offsetTop + document.documentElement.scrollTop;
@@ -90,13 +90,13 @@
           var newMouseX = event.clientX - c.offsetLeft + document.body.scrollLeft;
           var newMouseY = event.clientY - c.offsetTop + document.body.scrollTop;
         }
-      } 
+      }
 
       function game(){
         context.clearRect(0, 0, c.width, c.height);
         context.fillStyle = '#eeeeee';
         context.fillRect(0, 0, width, height);
-                
+
       }
 
         function Vector(x, y) {
@@ -112,7 +112,7 @@
         function multiply(vect, val){
           return new Vector(vect.x*val, vect.y*val);
         }
-  
+
       function getRandomColor() {
           var letters = '0123456789ABCDEF'.split('');
           var color = '#';
@@ -120,6 +120,19 @@
               color += letters[Math.floor(Math.random() * 16)];
           }
           return color;
+      }
+
+      function sendSource(src, user, otherUser, callback) {
+          $.ajax({
+              type: "POST",
+              url: "pending",
+              data: {
+                  "raw": src,
+                  "user": user,
+                  "opp": otherUser
+              },
+              success: callback
+          });
       }
 
       myVar = setInterval(game, 20);

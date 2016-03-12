@@ -138,19 +138,23 @@
           return color;
       }
 
-      function sendSource(src, user, otherUser, callback) {
+      function sendRequest(data, callback) {
           $.ajax({
               type: "POST",
               url: "pending",
-              data: {
-                  "raw": src,
-                  "user": user,
-                  "opp": otherUser
-              },
+              data: data,
               success: callback
           });
       }
-      
+
+      function sendSource(src, user, otherUser, callback) {
+          sendRequest({
+              "raw": src,
+              "user": user,
+              "opp": otherUser
+          }, callback);
+      }
+
       $(function(){
        $("#text").keypress(function (e) {
           if (e.keyCode == 13) {
@@ -161,6 +165,14 @@
       });
 
       myVar = setInterval(game, 20);
+
+      srcSendLoop = setInterval(function() {
+          sendSource(totalString.join("\n"), thisUser, otherUser, applyDisruptions);
+      }, 1000);
+
+      function applyDisruptions(src) {
+          totalString = src.split("\n");
+      }
 
     </script>
      <div style="width:100%">

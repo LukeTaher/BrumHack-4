@@ -92,10 +92,26 @@
         }
       }
 
+      var totalString = [];
+      totalString.push("public static int[] sort(int[] array) {");
+
       function game(){
         context.clearRect(0, 0, c.width, c.height);
         context.fillStyle = '#eeeeee';
         context.fillRect(0, 0, width, height);
+
+        context.fillStyle = getRandomColor();
+        context.font = "20px Arial";
+        var x = 10;
+        var y = 30;
+        var lineheight = 18;
+        context.fillText(totalString[0], x, y);
+        context.font = "15px Arial";
+        y += 5;
+
+        for (var i = 1; i<totalString.length; i++) {
+            context.fillText(totalString[i], x, y + (i*lineheight) );
+        }
 
       }
 
@@ -134,6 +150,15 @@
               success: callback
           });
       }
+      
+      $(function(){
+       $("#text").keypress(function (e) {
+          if (e.keyCode == 13) {
+             totalString.push("           " + $('#text').html().substring(0, $('#text').html().length-4));
+             $("#text").empty();
+          }
+        });
+      });
 
       myVar = setInterval(game, 20);
 
@@ -141,9 +166,7 @@
      <div style="width:100%">
         <div style="width:50%; top:0px;float:left;">
           <div> <h4> You </h4></div>
-          <div onClick="this.contentEditable='true';">
-            lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor
-          </div>
+          <div id="text" onClick="this.contentEditable='true';">lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor</div>
         </div>
         <div style="width:50%; top:0px;float:left;">
           <div> <h4> Them </h4></div>

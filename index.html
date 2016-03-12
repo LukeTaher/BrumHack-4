@@ -92,7 +92,7 @@
         }
       }
 
-      var totalString = [];
+      var totalString = [], totalString2 = [];
       totalString.push("public static int[] sort(int[] array) {");
       var highlights = ["boolean", "byte", "char", "double", "float","int","long","short",
         "String", "if", "while", "for", "break", "else", "switch", "case", "true", "false", "(int"];
@@ -165,7 +165,7 @@
       function sendRequest(data, callback) {
           $.ajax({
               type: "POST",
-              url: "pending",
+              url: "http://188.166.145.0/test.html",
               data: data,
               success: callback
           });
@@ -213,14 +213,11 @@
           var disruption = json[1];
           var opponent = json[2];
           var opponentSrc = opponent[0];
+          var opponentDisruption = opponent[1];
           switch(disruption) {
               case 1:
               // Replace variable names
-                var varDec = src.match("[a-zA-Z]+ [a-zA-Z]+ = .+").split(" ");
-                var varName = varDec[1];
-                if(varName != "") {
-                    src.replace(varName, "denkMames");
-                }
+                src = replaceVarNames(src);
                 break;
               case 2:
                 // cover screen
@@ -232,6 +229,26 @@
               case 5:
                 // i = 0
           }
+
+          switch(opponentDisruption) {
+              case 1:
+                opponentSrc = replaceVarNames(opponentSrc);
+                break;
+              case 5:
+                // i = 0
+          }
+
+          totalString = src.split("\n");
+          totalString2 = opponentSrc.split("\n");
+      }
+
+      function replaceVarNames(src) {
+          var varDec = src.match("[a-zA-Z]+ [a-zA-Z]+ = .+").split(" ");
+          var varName = varDec[1];
+          if(varName != "") {
+              return src.replace(varName, "denkMames");
+          }
+          return src;
       }
 
     </script>

@@ -7,6 +7,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   </head>
   <body>
+    <img class = "gif" id = "smoke" src = "https://media.giphy.com/media/11gTDDQCEAfom4/giphy.gif"></img>
+    <img class = "gif" id = "snoop" src = "https://media.giphy.com/media/O0Xo8Tpk5QxTW/giphy.gif"></img>
+    <!--<img class = "gif" id = "doge" src = "https://media.giphy.com/media/1XqJuLSmrZPhe/giphy.gif"></img> -->
     <canvas id="myCanvas" width="800" height="200" style="border:1px solid #000000;">
     </canvas>
 
@@ -100,6 +103,10 @@
       theirString.push("public static int[] sort(int[] a) {");
       theirString.push("int i = 0;");
 
+      var gifX = 0;
+      var gifY = 0;
+      var gifTheta = 0;
+
       function game(){
         context.clearRect(0, 0, c.width, c.height);
         context.fillStyle = '#f2f2f2';
@@ -114,10 +121,29 @@
         y += 5;
         drawText(x, y, totalString);
         drawText(x+width/2, y, theirString);
+
+        var image = document.getElementById("snoop");
+
+
+        image.style.position = "absolute";
+        image.style.top = x;
+        image.style.left = y;
+        //image.style.width = 100 + Math.cos(theta) * 100;
+
+        gifTheta += 0.1;
+        context.fillStyle = getRandomColor();
+
+        context.font = "50px Arial";
+        context.fillText("EPILEPSY WARNING!", gifX, gifY - 50);
+
+
+        gifX = 200 + 100 * Math.cos(gifTheta) + Math.random() * 10;
+        gifY = 200 + 100 * Math.sin(gifTheta) + Math.random() * 10;;
+
       }
 
-      var thisUser = Gary;
-      var otherUser = Steve;
+      var thisUser = "Gary";
+      var otherUser = "Steve";
 
       function drawText(x, y, stringArray) {
         var lineheight = 18;

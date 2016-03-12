@@ -95,26 +95,35 @@
       var totalString = [];
       totalString.push("public static int[] sort(int[] array) {");
       var highlights = ["boolean", "byte", "char", "double", "float","int","long","short", 
-        "String", "if", "while", "for", "break", "else", "switch", "case", "true", "false"];
+        "String", "if", "while", "for", "break", "else", "switch", "case", "true", "false", "(int"];
+      var theirString = [];
+      theirString.push("public static int[] sort(int[] a) {");
+      theirString.push("int i = 0;");
 
       function game(){
         context.clearRect(0, 0, c.width, c.height);
         context.fillStyle = '#f2f2f2';
         context.fillRect(0, 0, width, height);        
-        context.fillStyle = "#444";
         context.fillStyle = getRandomColor();
         context.font = "20px Arial";
         var x = 10;
         var y = 30;
-        var lineheight = 18;
         context.fillText(totalString[0], x, y);
+        context.fillText(totalString[0], x+width/2, y);
         context.font = "15px Arial";
         y += 5;
+        drawText(x, y, totalString);
+        drawText(x+width/2, y, theirString);
+      }
 
-        for (var i = 1; i<totalString.length; i++) {
-          x = 40;
-         words = totalString[i].split(" ");
-          //alert(words);
+      var thisUser;
+
+      function drawText(x, y, stringArray) {
+        var lineheight = 18;
+        var xVal = x+40;
+        for (var i = 1; i<stringArray.length; i++) {
+          xVal = x+40;
+          words = stringArray[i].split(" ");
           for (var j = 0; j < words.length; j++) {
             if (contains(highlights, words[j])) {
               context.fillStyle = getRandomColor();
@@ -122,12 +131,10 @@
             else {
               context.fillStyle = "#444";
             }
-            context.fillText(words[j], x, y + (i*lineheight) );
-            x += context.measureText(words[j]+" ").width; 
+            context.fillText(words[j], xVal, y + (i*lineheight) );
+            xVal += context.measureText(words[j]+" ").width; 
           }
-          //context.fillText(totalString[i], x, y + (i*lineheight) );
         }
-
       }
 
         function Vector(x, y) {
@@ -158,7 +165,7 @@
               type: "POST",
               url: "pending",
               data: data,
-              success: callback#
+              success: callback
           });
       }
 

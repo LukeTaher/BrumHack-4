@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Algorekt</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="800" height="200" style="border:1px solid #000000;">
+    </canvas>
+
+    <script>
+      //Browser Detection
+      navigator.sayswho= (function(){
+          var N= navigator.appName, ua= navigator.userAgent, tem;
+          var M= ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+          if(M && (tem= ua.match(/version\/([\.\d]+)/i))!= null) M[2]= tem[1];
+          M= M? [M[1], M[2]]: [N, navigator.appVersion, '-?'];
+       
+          return M;
+      })();
+       
+      var browser;
+      if (navigator.sayswho[0] == "Firefox")
+        browser="f";
+      else if (navigator.sayswho[0] == "Chrome")
+        browser="c";
+      else if (navigator.sayswho[0] == "Safari")
+        browser="s";
+      else  if (navigator.sayswho[0] == "Microsoft")
+        browser="m";
+      else
+        browser="f";
+
+      var mouseX = 0; //default values
+      var mouseY = 0; //default values
+      var mouseVec = new Vector(mouseX, mouseY);
+
+
+      var width = $(window).width()-40;
+      var height = $(window).height()*8/10;
+
+
+      var c = document.getElementById("myCanvas");
+
+      //event listener for mouse
+      c.addEventListener("click", canvasClick, false);
+      c.addEventListener('mousemove', onMouseUpdate, false);
+
+      c.width = width;
+      c.height = height;
+      var context = c.getContext("2d");
+
+      var pos = 0;
+      var mouseClicked = false;
+
+      function canvasClick(event)
+      { 
+        if (mouseClicked) {
+          mouseClicked = !mouseClicked;
+          if (browser == "f" || browser == "m") {
+            var newMouseX = event.clientX - c.offsetLeft + document.documentElement.scrollLeft;
+            var newMouseY = event.clientY - c.offsetTop + document.documentElement.scrollTop;
+          }
+          else { //"s" or "c"
+            var newMouseX = event.clientX - c.offsetLeft + document.body.scrollLeft;
+            var newMouseY = event.clientY - c.offsetTop + document.body.scrollTop;
+          }
+        }
+        else {
+          if (browser == "f" || browser == "m") {
+            mouseX = event.clientX - c.offsetLeft + document.documentElement.scrollLeft;
+            mouseY = event.clientY - c.offsetTop + document.documentElement.scrollTop;
+          }
+          else { //"s" or "c"
+            mouseX = event.clientX - c.offsetLeft + document.body.scrollLeft;
+            mouseY = event.clientY - c.offsetTop + document.body.scrollTop;
+          }
+        }
+      } 
+
+      function onMouseUpdate(event)
+      { 
+        if (browser == "f" || browser == "m") {
+          var newMouseX = event.clientX - c.offsetLeft + document.documentElement.scrollLeft;
+          var newMouseY = event.clientY - c.offsetTop + document.documentElement.scrollTop;
+        }
+        else { //"s" or "c"
+          var newMouseX = event.clientX - c.offsetLeft + document.body.scrollLeft;
+          var newMouseY = event.clientY - c.offsetTop + document.body.scrollTop;
+        }
+      } 
+
+      function game(){
+        context.clearRect(0, 0, c.width, c.height);
+        context.fillStyle = '#eeeeee';
+        context.fillRect(0, 0, width, height);
+                
+      }
+
+        function Vector(x, y) {
+          this.x = x;
+          this.y = y;
+        }
+
+        function normalise(vect) {
+          var mag = Math.sqrt(vect.x*vect.x + vect.y*vect.y);
+          return new Vector(vect.x/mag, vect.y/mag);
+        }
+
+        function multiply(vect, val){
+          return new Vector(vect.x*val, vect.y*val);
+        }
+  
+      function getRandomColor() {
+          var letters = '0123456789ABCDEF'.split('');
+          var color = '#';
+          for (var i = 0; i < 6; i++ ) {
+              color += letters[Math.floor(Math.random() * 16)];
+          }
+          return color;
+      }
+
+      myVar = setInterval(game, 20);
+
+    </script>
+     <div style="width:100%">
+        <div style="width:50%; top:0px;float:left;">
+          <div> <h4> You </h4></div>
+          <div onClick="this.contentEditable='true';">
+            lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor
+          </div>
+        </div>
+        <div style="width:50%; top:0px;float:left;">
+          <div> <h4> Them </h4></div>
+          <div onClick="this.contentEditable='false';">
+            lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor
+          </div>
+        </div>
+    </div>
+  </body>
+</html>

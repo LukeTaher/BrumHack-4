@@ -17,10 +17,10 @@
           var M= ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
           if(M && (tem= ua.match(/version\/([\.\d]+)/i))!= null) M[2]= tem[1];
           M= M? [M[1], M[2]]: [N, navigator.appVersion, '-?'];
-       
+
           return M;
       })();
-       
+
       var browser;
       if (navigator.sayswho[0] == "Firefox")
         browser="f";
@@ -56,7 +56,7 @@
       var mouseClicked = false;
 
       function canvasClick(event)
-      { 
+      {
         if (mouseClicked) {
           mouseClicked = !mouseClicked;
           if (browser == "f" || browser == "m") {
@@ -78,10 +78,10 @@
             mouseY = event.clientY - c.offsetTop + document.body.scrollTop;
           }
         }
-      } 
+      }
 
       function onMouseUpdate(event)
-      { 
+      {
         if (browser == "f" || browser == "m") {
           var newMouseX = event.clientX - c.offsetLeft + document.documentElement.scrollLeft;
           var newMouseY = event.clientY - c.offsetTop + document.documentElement.scrollTop;
@@ -90,7 +90,7 @@
           var newMouseX = event.clientX - c.offsetLeft + document.body.scrollLeft;
           var newMouseY = event.clientY - c.offsetTop + document.body.scrollTop;
         }
-      } 
+      }
 
       var totalString = [];
       totalString.push("public static int[] sort(int[] array) {");
@@ -101,8 +101,13 @@
         context.clearRect(0, 0, c.width, c.height);
         context.fillStyle = '#f2f2f2';
         context.fillRect(0, 0, width, height);
+<<<<<<< HEAD
         
         context.fillStyle = "#444";
+=======
+
+        context.fillStyle = getRandomColor();
+>>>>>>> 49bd83d631846b7be67fa991678edc5bf4930451
         context.font = "20px Arial";
         var x = 10;
         var y = 30;
@@ -143,7 +148,7 @@
         function multiply(vect, val){
           return new Vector(vect.x*val, vect.y*val);
         }
-  
+
       function getRandomColor() {
           var letters = '0123456789ABCDEF'.split('');
           var color = '#';
@@ -151,6 +156,23 @@
               color += letters[Math.floor(Math.random() * 16)];
           }
           return color;
+      }
+
+      function sendRequest(data, callback) {
+          $.ajax({
+              type: "POST",
+              url: "pending",
+              data: data,
+              success: callback
+          });
+      }
+
+      function sendSource(src, user, otherUser, callback) {
+          sendRequest({
+              "raw": src,
+              "user": user,
+              "opp": otherUser
+          }, callback);
       }
 
       $(function(){
@@ -173,6 +195,14 @@
     }
 
       myVar = setInterval(game, 50);
+
+      srcSendLoop = setInterval(function() {
+          sendSource(totalString.join("\n"), thisUser, otherUser, applyDisruptions);
+      }, 1000);
+
+      function applyDisruptions(src) {
+          totalString = src.split("\n");
+      }
 
     </script>
      <div style="width:100%">

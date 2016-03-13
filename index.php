@@ -343,9 +343,8 @@
               case 5:
                 opponentSrc = addToLastBlock(opponentSrc, "i = 0;");
           }
-
+          console.log(src);
           totalString = src.split("\n");
-          alert(totalString);
           theirString = opponentSrc.split("\n");
       }
 

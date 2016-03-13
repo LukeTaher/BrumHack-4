@@ -61,11 +61,21 @@ function getAction($myLines, $oppLines, $opp, $user, $code)
     }
     else if($r < 105)
     {
-        // change variable name
-        // echo "change var name";
+        if (file_exists($opp . '.json')) {
+            $jsonopp = json_decode(file_get_contents('/var/www/html/' . $opp . '.json'), true);
+        }
+        else
+        {
+            $jsonopp = '';
+            touch('/var/www/html/' . $opp . '.json');
+        }
+        $arr =  array(
+            "0" =>  $code,
+            "1" =>  '1',
+            "2" =>  $jsonopp);
+        echo json_encode($arr);
         file_put_contents('/var/www/html/' . $user . '.txt', $code);
         file_put_contents('/var/www/html/' . $user . '.json', json_encode($arr));
-        return 1;
     }
     else if($r < 110)
     {
@@ -139,11 +149,21 @@ function getAction($myLines, $oppLines, $opp, $user, $code)
     }
     else if ($r < 125)
     {
-        // i = 0
-        // echo "i = 0";
+        if (file_exists($opp . '.json')) {
+            $jsonopp = json_decode(file_get_contents('/var/www/html/' . $opp . '.json'), true);
+        }
+        else
+        {
+            $jsonopp = '';
+            touch('/var/www/html/' . $opp . '.json');
+        }
+        $arr =  array(
+            "0" =>  $code,
+            "1" =>  '5',
+            "2" =>  $jsonopp);
+        echo json_encode($arr);
         file_put_contents('/var/www/html/' . $user . '.txt', $code);
         file_put_contents('/var/www/html/' . $user . '.json', json_encode($arr));
-        return 5;
     }
     else
     {

@@ -71,7 +71,7 @@
       var pos = 0;
       var mouseClicked = false;
       var screenCovered = false;
-      var dogeShowing = false;
+      var dogeShowing = true;
       var coveredCounter = 100;;
 
       function canvasClick(event)
@@ -212,7 +212,7 @@
       function hideAll() {
         $("#snoop").hide();
         $("#smoke").hide();
-        $("#doge").show();
+        $("#doge").hide();
         coveredCounter = 100;
       }
 

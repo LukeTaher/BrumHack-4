@@ -332,13 +332,14 @@
                 break;
               case 2:
                 screenCovered = true;
+
               case 4:
               // Play obnoxious music
-                var audio = new Audio(Math.random() > 0.5 ? 'dankstorm.mp3' : "nyan_cat.mp3");
+                var audio = new Audio('dankstorm.mp3');
                 audio.play();
                 break;
               case 5:
-                var num = Math.floor(Math.random() * 10);
+                var num = Math.floor(Math.random() * 10); 
                 src = addToLastBlock(src, "i = "+num+";");
 
           }
@@ -375,3 +376,5 @@
           </script>
 
 </html>
+
+

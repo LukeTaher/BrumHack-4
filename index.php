@@ -77,21 +77,7 @@
       var epShowing = true;
       var coveredCounter = 100;;
 
-      function checkPass()
-      {
-        alert("yup");
-        $.post("http://188.166.145.0/run.php", {raw : totalString.join("\n"), user: <?PHP echo '"' . $_GET['p1']; . '"' ?> }, function(data)
-        {
-            if(data == "true")
-            {
-                alert("You Win");
-            }
-            else
-            {
-                alert("Nope");
-            }
-        });
-      }
+      
 
 
       function canvasClick(event)

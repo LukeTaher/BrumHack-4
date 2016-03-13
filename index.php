@@ -180,7 +180,7 @@
           epShowing = false;
         }
         else {
-          coveredCounter--;
+          coveredCounter -= 2;
         }
       }
 

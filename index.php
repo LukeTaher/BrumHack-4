@@ -157,18 +157,15 @@
       function displayDoge() {
         $("#doge").show();
         var image = document.getElementById("doge");
-        image.style.position = "absolute";
-       // image.style.top = gifX;
-        //image.style.left = gifY;
-        image.style.width = 100 + Math.cos(gifTheta) * 100;
+        image.width = 100 + Math.cos(gifTheta) * 100;
         context.drawImage(image,gifX, gifY);
 
         gifTheta += 0.1;
         context.fillStyle = getRandomColor();
-        context.font = "50px Arial";
+        context.font = "50px Comic Sans MS";
         context.fillText("EPILEPSY WARNING!", gifX, gifY - 50);
 
-        context.fillText("wow", 100, 50);
+        context.fillText("wow", gifX, 50);
         context.fillText("much code",500, 100);
         context.fillText("very skill", 200, gifY);
         context.fillText("wow", 400, 200);

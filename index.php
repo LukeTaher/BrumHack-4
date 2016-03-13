@@ -158,9 +158,8 @@
       var otherUser = <?PHP echo '"' . $_GET['p2'] . '"'; ?>;
 
       function displayCat(y) {
-        $("#cat").show();
         var image = document.getElementById("cat");
-        context.drawImage(image,gifX, y-10);
+        context.drawImage(image,gifX, y-15+Math.floor(Math.random()*10));
         gifX = gifX + 10;
 
         if (Math.floor(Math.random() * coveredCounter) == 0) {
@@ -172,7 +171,6 @@
       }
 
       function displayDoge() {
-        $("#doge").show();
         var image = document.getElementById("doge");
         context.drawImage(image,gifX, gifY);
 

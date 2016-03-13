@@ -70,7 +70,8 @@
 
       var pos = 0;
       var mouseClicked = false;
-      var screenCovered = true;
+      var screenCovered = false;
+      var dogeShowing = false;
       var coveredCounter = 100;;
 
       function canvasClick(event)
@@ -142,12 +143,31 @@
           displaySmoke();
         }
         else {
-          hideSmoke();
+          hideAll();
         }
       }
 
       var thisUser = "Gary";
       var otherUser = "Steve";
+
+      function displayDoge() {
+        $("#doge").show();
+        var image = document.getElementById("gif");
+
+        image.style.position = "absolute";
+        image.style.top = x;
+        image.style.left = y;
+        //image.style.width = 100 + Math.cos(theta) * 100;
+
+        theta += 0.1;
+        context.fillStyle = getRandomColor();
+        context.font = "50px Arial";
+        context.fillText("EPILEPSY WARNING!", x, y - 50);
+
+
+        x = 200 + 100 * Math.cos(theta) + Math.random() * 10;
+        y = 200 + 100 * Math.sin(theta) + Math.random() * 10;;
+      }
 
       function displaySmoke() {
         $("#snoop").show();
@@ -189,9 +209,10 @@
         }
       }
 
-      function hideSmoke() {
+      function hideAll() {
         $("#snoop").hide();
         $("#smoke").hide();
+        $("#doge").show();
         coveredCounter = 100;
       }
 

@@ -323,8 +323,8 @@
                 src = replaceVarNames(src);
                 break;
               case 2:
+                //smoke
                 screenCovered = true;
-
               case 4:
               // Play obnoxious music
                 var audio = new Audio('dankstorm.mp3');

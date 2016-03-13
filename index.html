@@ -294,7 +294,7 @@
       $(function(){
        $("#text").keypress(function (e) {
           if (e.keyCode == 13) {
-             totalString.push($('#text').html().substring(0, $('#text').html().length-4));
+             totalString.push($('#text').html().text().substring(0, $('#text').html().text().length-4));
              $("#text").empty();
           }
         });

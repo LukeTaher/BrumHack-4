@@ -15,7 +15,7 @@
     </canvas>
      <div style="width:100%">
         <div style="width:50%; top:0px;float:left;">
-          <div id= "myName" onClick="this.contentEditable='true';" style="width:50%; top:0px;float;"><h2>Gary</h2></div>
+          <div id= "myName" onClick="this.contentEditable='false';" style="width:50%; top:0px;float;"><h2>Gary</h2></div>
           <div id="text" onClick="this.contentEditable='true';">lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor</div>
         </div>
         <div style="width:50%; top:0px;float:left;">
@@ -278,9 +278,9 @@
       myVar = setInterval(game, 50);
 
       // Send the player's source code to the server every second
-      srcSendLoop = setInterval(function() {
-          sendSource(totalString.join("\n"), thisUser, otherUser, applyDisruptions);
-      }, 1000);
+      // srcSendLoop = setInterval(function() {
+      //     sendSource(totalString.join("\n"), thisUser, otherUser, applyDisruptions);
+      // }, 1000);
 
       // Apply the disruptions from the server to the source code
       function applyDisruptions(str) {

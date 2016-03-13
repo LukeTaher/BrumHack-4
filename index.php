@@ -18,8 +18,8 @@
      <div style="width:100%">
         <div style="width:50%; top:0px;float:left;">
           <div id= "myName" onClick="this.contentEditable='false';" style="width:50%; top:0px;float;">
-            <div style = "width:25%; top:0px;float:left"><h2><?PHP echo $_GET['p1']; ?></h2></div>
-            <div style = "width:25%; top:0px;float:left"><button onclick="submitBtn()">Submit</button></div>
+            <div style = "width:50%; top:0px;float:left"><h2><?PHP echo $_GET['p1']; ?></h2></div>
+            <div style = "width:50%; top:0px;float:left"><button onclick="submitBtn()">Submit</button></div>
           </div>
           <div id="text" onClick="this.contentEditable='true';">lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor</div>
         </div>

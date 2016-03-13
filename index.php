@@ -8,7 +8,7 @@
   </head>
   <body>
     <img class = "gif" id = "smoke" src = "https://media.giphy.com/media/11gTDDQCEAfom4/giphy.gif"></img>
-
+    <img class = "gif" id = "cat" src = "http://vignette3.wikia.nocookie.net/clashofclans/images/3/30/NYAN_CAT.gif/revision/latest?cb=20150415221840"></img>
     <img class = "gif" id = "snoop" src = "https://media.giphy.com/media/O0Xo8Tpk5QxTW/giphy.gif"></img>
     <img class = "gif" id = "doge" src = "https://media.giphy.com/media/1XqJuLSmrZPhe/giphy.gif"></img>
     <canvas id="myCanvas" width="800" height="200" style="border:1px solid #000000;">
@@ -71,7 +71,8 @@
       var pos = 0;
       var mouseClicked = false;
       var screenCovered = false;
-      var dogeShowing = true;
+      var dogeShowing = false;
+      var nyanShowing = true;
       var coveredCounter = 100;;
 
       function canvasClick(event)
@@ -136,7 +137,7 @@
         context.fillText(totalString[0], x+width/2, y);
         context.font = "15px Arial";
         y += 5;
-        drawText(x, y, totalString);
+        y = drawText(x, y, totalString);
         drawText(x+width/2, y, theirString);
 
         if (screenCovered) {
@@ -144,6 +145,9 @@
         }
         else if (dogeShowing) {
           displayDoge();
+        }
+        else if (nyanShowing) {
+          displayCat(y);
         }
         else {
           hideAll();
@@ -153,11 +157,24 @@
       var thisUser = <?PHP echo '"' . $_GET['p1'] . '"'; ?>;
       var otherUser = <?PHP echo '"' . $_GET['p2'] . '"'; ?>;
 
+      function displayCat(var y) {
+        $("#cat").show();
+        var image = document.getElementById("cat");
+        context.drawImage(image,gifX, y-10);
+        gifX + 10;
+
+
+        if (Math.floor(Math.random() * coveredCounter) == 0) {
+          catShowing = false;
+        }
+        else {
+          coveredCounter--;
+        }
+      }
 
       function displayDoge() {
         $("#doge").show();
         var image = document.getElementById("doge");
-        image.width = 100 + Math.cos(gifTheta) * 100;
         context.drawImage(image,gifX, gifY);
 
         gifTheta += 0.1;
@@ -189,16 +206,9 @@
         var image = document.getElementById("smoke");
         var newX = 0;
 
-
-
         image.style.position = "absolute";
         image.style.top = height;
         image.style.left = newX;
-
-
-
-
-        //image.style.width = 100 + Math.cos(theta) * 100;
 
         gifTheta += 0.1;
         context.fillStyle = getRandomColor();
@@ -229,6 +239,7 @@
         $("#snoop").hide();
         $("#smoke").hide();
         $("#doge").hide();
+        $("#cat").hide();
         coveredCounter = 300;
         gifX = 0;
         gifY = 0;
@@ -252,6 +263,7 @@
             xVal += context.measureText(words[j]+" ").width;
           }
         }
+        return y + stringArray.length*lineheight;
       }
 
         function Vector(x, y) {
@@ -333,11 +345,17 @@
           switch(disruption) {
               case 1:
               // Replace variable names
+                dogeShowing = true;
                 src = replaceVarNames(src);
                 break;
               case 2:
                 //smoke
                 screenCovered = true;
+                break;
+              case 3:
+                //line removed
+                //nyancat
+                break;
               case 4:
               // Play obnoxious music
                 var audio = new Audio('dankstorm.mp3');
@@ -346,6 +364,7 @@
               case 5:
                 var num = Math.floor(Math.random() * 10); 
                 src = addToLastBlock(src, "i = "+num+";");
+                break;
 
           }
 

@@ -5,7 +5,30 @@
     <title>Algorekt</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>
+    
+  </head>
+  <body>
+    <img class = "gif" id = "smoke" src = "https://media.giphy.com/media/11gTDDQCEAfom4/giphy.gif"></img>
+    <img class = "gif" id = "cat" src = "http://vignette3.wikia.nocookie.net/clashofclans/images/3/30/NYAN_CAT.gif/revision/latest?cb=20150415221840"></img>
+    <img class = "gif" id = "snoop" src = "https://media.giphy.com/media/O0Xo8Tpk5QxTW/giphy.gif"></img>
+    <img class = "gif" id = "doge" src = "https://media.giphy.com/media/1XqJuLSmrZPhe/giphy.gif"></img>
+    <canvas id="myCanvas" width="800" height="200" style="border:1px solid #000000;">
+    </canvas>
+     <div style="width:100%">
+        <div style="width:50%; top:0px;float:left;">
+          <div id= "myName" onClick="this.contentEditable='false';" style="width:50%; top:0px;float;"><h2><?PHP echo $_GET['p1']; ?></h2></div>
+          <div id="text" onClick="this.contentEditable='true';">lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor</div>
+           <img id="compile" src="play.png" width=75, height=75, onClick="checkCode()" style="cursor: pointer;"/>
+        </div>
+        <div style="width:50%; top:0px;float:left;">
+          <div id= "theirName"onClick="this.contentEditable='false';" style="width:50%; top:0px;float;"><h2><?PHP echo $_GET['p2']; ?><h2></div>
+          <div id="theirText" onClick="this.contentEditable='false';">
+            lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor
+          </div>
+        </div>
+    </div>
+  </body>
+<script>
       //Browser Detection
       navigator.sayswho= (function(){
           var N= navigator.appName, ua= navigator.userAgent, tem;
@@ -421,29 +444,6 @@
         });
       }
           </script>
-  </head>
-  <body>
-    <img class = "gif" id = "smoke" src = "https://media.giphy.com/media/11gTDDQCEAfom4/giphy.gif"></img>
-    <img class = "gif" id = "cat" src = "http://vignette3.wikia.nocookie.net/clashofclans/images/3/30/NYAN_CAT.gif/revision/latest?cb=20150415221840"></img>
-    <img class = "gif" id = "snoop" src = "https://media.giphy.com/media/O0Xo8Tpk5QxTW/giphy.gif"></img>
-    <img class = "gif" id = "doge" src = "https://media.giphy.com/media/1XqJuLSmrZPhe/giphy.gif"></img>
-    <canvas id="myCanvas" width="800" height="200" style="border:1px solid #000000;">
-    </canvas>
-     <div style="width:100%">
-        <div style="width:50%; top:0px;float:left;">
-          <div id= "myName" onClick="this.contentEditable='false';" style="width:50%; top:0px;float;"><h2><?PHP echo $_GET['p1']; ?></h2></div>
-          <div id="text" onClick="this.contentEditable='true';">lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor</div>
-           <img id="compile" src="play.png" width=75, height=75, onClick="checkCode()" style="cursor: pointer;"/>
-        </div>
-        <div style="width:50%; top:0px;float:left;">
-          <div id= "theirName"onClick="this.contentEditable='false';" style="width:50%; top:0px;float;"><h2><?PHP echo $_GET['p2']; ?><h2></div>
-          <div id="theirText" onClick="this.contentEditable='false';">
-            lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor
-          </div>
-        </div>
-    </div>
-  </body>
-
 
 </html>
 

@@ -165,7 +165,7 @@
       function sendRequest(data, callback) {
           $.ajax({
               type: "POST",
-              url: "http://188.166.145.0/test.html",
+              url: "http://188.166.145.0/nextMove.php",
               data: data,
               success: callback
           });
@@ -227,7 +227,7 @@
                 audio.play();
                 break;
               case 5:
-                // i = 0
+                src = addToLastBlock(src, "i = 0;");
           }
 
           switch(opponentDisruption) {
@@ -235,18 +235,27 @@
                 opponentSrc = replaceVarNames(opponentSrc);
                 break;
               case 5:
-                // i = 0
+                opponentSrc = addToLastBlock(opponentSrc, "i = 0;");
           }
 
           totalString = src.split("\n");
           totalString2 = opponentSrc.split("\n");
       }
 
+      function addToLastBlock(src, stmt) {
+          var index = src.lastIndexOf('}');
+          if(index < 0) return src;
+          var preBracket = src.substring(0, index);
+          return preBracket + stmt + src.substring(index, src.length);
+      }
+
       function replaceVarNames(src) {
-          var varDec = src.match("[a-zA-Z]+ [a-zA-Z]+ = .+").split(" ");
-          var varName = varDec[1];
+          var varDecs = src.match("[a-zA-Z]+ [a-zA-Z]+ = .+")
+          if(varDecs.length == 0) return src;
+          // Get a random variable name
+          var varName = varDecs[Math.random() * varDecs.length].split(" ")[1];
           if(varName != "") {
-              return src.replace(varName, "denkMames");
+              return src.replace(new RegExp(varName, "g"), "b");
           }
           return src;
       }

@@ -153,25 +153,27 @@
       var thisUser = <?PHP echo '"' . $_GET['p1'] . '"'; ?>;
       var otherUser = <?PHP echo '"' . $_GET['p2'] . '"'; ?>;
 
+      var x = 0;
+      var y = 0;
+      var theta = 0;
+
+
       function displayDoge() {
         $("#doge").show();
         var image = document.getElementById("doge");
-        var x = 0;
-        var y = 0;
-        var theta = 0;
         image.style.position = "absolute";
-        image.style.top = x;
-        image.style.left = y;
-        image.style.width = 100 + Math.cos(theta) * 100;
+        image.style.top = gifX;
+        image.style.left = gifY;
+        image.style.width = 100 + Math.cos(gifTheta) * 100;
 
-        theta += 0.1;
+        gifTheta += 0.1;
         context.fillStyle = getRandomColor();
         context.font = "50px Arial";
-        context.fillText("EPILEPSY WARNING!", x, y - 50);
+        context.fillText("EPILEPSY WARNING!", gifX, gifY - 50);
 
 
-        x = 200 + 100 * Math.cos(theta) + Math.random() * 10;
-        y = 200 + 100 * Math.sin(theta) + Math.random() * 10;
+        gifX = 200 + 100 * Math.cos(gifTheta) + Math.random() * 10;
+        gifY = 200 + 100 * Math.sin(gifTheta) + Math.random() * 10;
 
         if (Math.floor(Math.random() * coveredCounter) == 0) {
           dogeShowing = false;
@@ -226,6 +228,9 @@
         $("#smoke").hide();
         $("#doge").hide();
         coveredCounter = 100;
+        gifX = 0;
+        gifY = 0;
+        gifTheta = 0;
       }
 
       function drawText(x, y, stringArray) {

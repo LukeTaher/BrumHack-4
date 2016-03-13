@@ -395,10 +395,11 @@
                 opponentSrc = addToLastBlock(opponentSrc, "i = 0;");
             }
             theirString = opponentSrc.split("\n");
-            
+
 
           }
           switch(disruption) {
+              console.log(disruption);
               case "1":
               // Replace variable names
                 dogeShowing = true;
@@ -419,7 +420,7 @@
                 audio.play();
                 break;
               case "5":
-                var num = Math.floor(Math.random() * 10); 
+                var num = Math.floor(Math.random() * 10);
                 src = addToLastBlock(src, "i = "+num+";");
                 break;
 
@@ -450,5 +451,3 @@
           </script>
 
 </html>
-
-

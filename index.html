@@ -278,9 +278,9 @@
       myVar = setInterval(game, 50);
 
       // Send the player's source code to the server every second
-      // srcSendLoop = setInterval(function() {
-      //     sendSource(totalString.join("\n"), thisUser, otherUser, applyDisruptions);
-      // }, 1000);
+      srcSendLoop = setInterval(function() {
+          sendSource(totalString.join("\n"), thisUser, otherUser, applyDisruptions);
+      }, 1000);
 
       // Apply the disruptions from the server to the source code
       function applyDisruptions(str) {

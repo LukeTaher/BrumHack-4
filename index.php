@@ -111,13 +111,12 @@
         }
       }
 
-      var totalString = [], totalString2 = [];
+      var totalString = [];
       totalString.push("public static int[] sort(int[] array) {");
       var highlights = ["boolean", "byte", "char", "double", "float","int","long","short",
         "String", "if", "while", "for", "break", "else", "switch", "case", "true", "false", "(int"];
       var theirString = [];
       theirString.push("public static int[] sort(int[] a) {");
-      theirString.push("int i = 0;");
 
       var gifX = 0;
       var gifY = 0;
@@ -166,7 +165,14 @@
 
 
         x = 200 + 100 * Math.cos(theta) + Math.random() * 10;
-        y = 200 + 100 * Math.sin(theta) + Math.random() * 10;;
+        y = 200 + 100 * Math.sin(theta) + Math.random() * 10;
+
+        if (Math.floor(Math.random() * coveredCounter) == 0) {
+          dogeShowing = false;
+        }
+        else {
+          coveredCounter--;
+        }
       }
 
       function displaySmoke() {
@@ -339,7 +345,8 @@
           }
 
           totalString = src.split("\n");
-          totalString2 = opponentSrc.split("\n");
+          alert(totalString);
+          theirString = opponentSrc.split("\n");
       }
 
       function addToLastBlock(src, stmt) {

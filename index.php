@@ -161,8 +161,7 @@
         $("#cat").show();
         var image = document.getElementById("cat");
         context.drawImage(image,gifX, y-10);
-        gifX + 10;
-
+        gifX = gifX + 10;
 
         if (Math.floor(Math.random() * coveredCounter) == 0) {
           catShowing = false;

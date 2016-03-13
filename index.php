@@ -153,10 +153,6 @@
       var thisUser = <?PHP echo '"' . $_GET['p1'] . '"'; ?>;
       var otherUser = <?PHP echo '"' . $_GET['p2'] . '"'; ?>;
 
-      var x = 0;
-      var y = 0;
-      var theta = 0;
-
 
       function displayDoge() {
         $("#doge").show();
@@ -227,7 +223,7 @@
         $("#snoop").hide();
         $("#smoke").hide();
         $("#doge").hide();
-        coveredCounter = 100;
+        coveredCounter = 300;
         gifX = 0;
         gifY = 0;
         gifTheta = 0;

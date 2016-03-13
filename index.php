@@ -11,11 +11,16 @@
     <img class = "gif" id = "cat" src = "http://vignette3.wikia.nocookie.net/clashofclans/images/3/30/NYAN_CAT.gif/revision/latest?cb=20150415221840"></img>
     <img class = "gif" id = "snoop" src = "https://media.giphy.com/media/O0Xo8Tpk5QxTW/giphy.gif"></img>
     <img class = "gif" id = "doge" src = "https://media.giphy.com/media/1XqJuLSmrZPhe/giphy.gif"></img>
+    
     <canvas id="myCanvas" width="800" height="200" style="border:1px solid #000000;">
     </canvas>
+
      <div style="width:100%">
         <div style="width:50%; top:0px;float:left;">
-          <div id= "myName" onClick="this.contentEditable='false';" style="width:50%; top:0px;float;"><h2><?PHP echo $_GET['p1']; ?></h2></div>
+          <div id= "myName" onClick="this.contentEditable='false';" style="width:50%; top:0px;float:left;">
+            <div style = "width:25%; top:0px;float:left"><h2><?PHP echo $_GET['p1']; ?></h2></div>
+            <div style = "width:25%; top:0px;float:left"><button onclick="submitBtn()">Submit</button></div>
+          </div>
           <div id="text" onClick="this.contentEditable='true';">lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor</div>
         </div>
         <div style="width:50%; top:0px;float:left;">
@@ -75,6 +80,9 @@
       var nyanShowing = false;
       var epShowing = true;
       var coveredCounter = 100;;
+
+      function submitBtn() {
+      }
 
 
       function canvasClick(event)
@@ -386,6 +394,7 @@
                 break;
               case 4:
               // Play obnoxious music
+                epShowing = true;
                 var audio = new Audio('dankstorm.mp3');
                 audio.play();
                 break;

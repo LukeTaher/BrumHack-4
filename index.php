@@ -141,6 +141,9 @@
         if (screenCovered) {
           displaySmoke();
         }
+        else if (dogeShowing) {
+          displayDoge();
+        }
         else {
           hideAll();
         }
@@ -344,7 +347,7 @@
                 opponentSrc = addToLastBlock(opponentSrc, "i = 0;");
           }
           totalString = src.split("\n");
-          console.log(opponentSrc);
+         // console.log(opponentSrc);
           theirString = opponentSrc.split("\n");
       }
 

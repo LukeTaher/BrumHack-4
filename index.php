@@ -157,7 +157,7 @@
       var thisUser = <?PHP echo '"' . $_GET['p1'] . '"'; ?>;
       var otherUser = <?PHP echo '"' . $_GET['p2'] . '"'; ?>;
 
-      function displayCat(var y) {
+      function displayCat(y) {
         $("#cat").show();
         var image = document.getElementById("cat");
         context.drawImage(image,gifX, y-10);

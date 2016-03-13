@@ -155,7 +155,7 @@
 
       function displayDoge() {
         $("#doge").show();
-        var image = document.getElementById("gif");
+        var image = document.getElementById("doge");
 
         image.style.position = "absolute";
         image.style.top = x;

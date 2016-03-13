@@ -159,6 +159,10 @@
 
       function displayCat(y) {
         var image = document.getElementById("cat");
+        image.style.width = "200px";
+        image.style.height = "20px";
+
+
         context.drawImage(image,gifX, y-15+Math.floor(Math.random()*10));
         gifX = gifX + 10;
 

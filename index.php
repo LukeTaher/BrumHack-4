@@ -161,7 +161,7 @@
        // image.style.top = gifX;
         //image.style.left = gifY;
         image.style.width = 100 + Math.cos(gifTheta) * 100;
-        ctx.drawImage(image,gifX, gifY);
+        context.drawImage(image,gifX, gifY);
 
         gifTheta += 0.1;
         context.fillStyle = getRandomColor();

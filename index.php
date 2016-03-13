@@ -147,8 +147,8 @@
         }
       }
 
-      var thisUser = <?PHP echo $_GET['p1']; ?>;
-      var otherUser = <?PHP echo $_GET['p2']; ?>;
+      var thisUser = <?PHP echo '"' . $_GET['p1'] . '"'; ?>;
+      var otherUser = <?PHP echo '"' . $_GET['p2'] . '"'; ?>;
 
       function displayDoge() {
         $("#doge").show();

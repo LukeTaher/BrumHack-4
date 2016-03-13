@@ -398,8 +398,8 @@
 
 
           }
+          console.log(disruption);
           switch(disruption) {
-              console.log(disruption);
               case "1":
               // Replace variable names
                 dogeShowing = true;

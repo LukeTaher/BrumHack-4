@@ -406,7 +406,7 @@
           return src;
       }
 
-      function compile(){
+      function checkCode(){
         alert("yup");
         $.post("http://188.166.145.0/save.php", {raw : totalString.join("\n"), user: <?PHP echo $_GET['p1']; ?>}, function(data)
         {
@@ -433,7 +433,7 @@
         <div style="width:50%; top:0px;float:left;">
           <div id= "myName" onClick="this.contentEditable='false';" style="width:50%; top:0px;float;"><h2><?PHP echo $_GET['p1']; ?></h2></div>
           <div id="text" onClick="this.contentEditable='true';">lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor</div>
-           <img id="compile" src="play.png" width=75, height=75, onClick="compile()" style="cursor: pointer;"/>
+           <img id="compile" src="play.png" width=75, height=75, onClick="checkCode()" style="cursor: pointer;"/>
         </div>
         <div style="width:50%; top:0px;float:left;">
           <div id= "theirName"onClick="this.contentEditable='false';" style="width:50%; top:0px;float;"><h2><?PHP echo $_GET['p2']; ?><h2></div>

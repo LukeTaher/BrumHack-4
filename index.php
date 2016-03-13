@@ -74,7 +74,7 @@
       var screenCovered = false;
       var dogeShowing = false;
       var nyanShowing = false;
-      var epShowing = true;
+      var epShowing = false;
       var coveredCounter = 100;;
 
       function checkPass()
@@ -384,8 +384,19 @@
           var src = json[0];
           var disruption = json[1];
           var opponent = json[2];
-          var opponentSrc = opponent[0];
-          var opponentDisruption = opponent[1];
+          if (opponent[0] != null) {
+            var opponentSrc = opponent[0];
+            var opponentDisruption = opponent[1];
+            switch(opponentDisruption) {
+              case 1:
+                opponentSrc = replaceVarNames(opponentSrc);
+                break;
+              case 5:
+                opponentSrc = addToLastBlock(opponentSrc, "i = 0;");
+            }
+            theirString = opponentSrc.split("\n");
+
+          }
           switch(disruption) {
               case 1:
               // Replace variable names
@@ -413,16 +424,7 @@
 
           }
 
-          switch(opponentDisruption) {
-              case 1:
-                opponentSrc = replaceVarNames(opponentSrc);
-                break;
-              case 5:
-                opponentSrc = addToLastBlock(opponentSrc, "i = 0;");
-          }
           totalString = src.split("\n");
-         // console.log(opponentSrc);
-          theirString = opponentSrc.split("\n");
       }
 
       function addToLastBlock(src, stmt) {

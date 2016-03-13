@@ -10,11 +10,23 @@
     <img class = "gif" id = "smoke" src = "https://media.giphy.com/media/11gTDDQCEAfom4/giphy.gif"></img>
 
     <img class = "gif" id = "snoop" src = "https://media.giphy.com/media/O0Xo8Tpk5QxTW/giphy.gif"></img>
-    <img class = "gif" id = "doge" src = "https://media.giphy.com/media/1XqJuLSmrZPhe/giphy.gif"></img>
+<!--    <img class = "gif" id = "doge" src = "https://media.giphy.com/media/1XqJuLSmrZPhe/giphy.gif"></img> -->
     <canvas id="myCanvas" width="800" height="200" style="border:1px solid #000000;">
     </canvas>
-
-    <script>
+     <div style="width:100%">
+        <div style="width:50%; top:0px;float:left;">
+          <div id= "myName" onClick="this.contentEditable='true';" style="width:50%; top:0px;float;"><h2>Gary</h2></div>
+          <div id="text" onClick="this.contentEditable='true';">lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor</div>
+        </div>
+        <div style="width:50%; top:0px;float:left;">
+          <div id= "theirName"onClick="this.contentEditable='false';" style="width:50%; top:0px;float;"><h2>Steve<h2></div>
+          <div id="theirText" onClick="this.contentEditable='false';">
+            lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor
+          </div>
+        </div>
+    </div>
+  </body>
+  <script>
       //Browser Detection
       navigator.sayswho= (function(){
           var N= navigator.appName, ua= navigator.userAgent, tem;
@@ -326,19 +338,8 @@
           }
           return src;
       }
+          </script>
 
-    </script>
-     <div style="width:100%">
-        <div style="width:50%; top:0px;float:left;">
-          <div id= "myName" onClick="this.contentEditable='true';" style="width:50%; top:0px;float;"><h2>Gary</h2></div>
-          <div id="text" onClick="this.contentEditable='true';">lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor</div>
-        </div>
-        <div style="width:50%; top:0px;float:left;">
-          <div id= "theirName"onClick="this.contentEditable='false';" style="width:50%; top:0px;float;"><h2>Steve<h2></div>
-          <div id="theirText" onClick="this.contentEditable='false';">
-            lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor
-          </div>
-        </div>
-    </div>
-  </body>
 </html>
+
+

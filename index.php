@@ -155,7 +155,7 @@
         context.fillText(totalString[0], x+width/2, y);
         context.font = "15px Arial";
         y += 5;
-        y = drawText(x, y, totalString);
+        var tempY = drawText(x, y, totalString);
         drawText(x+width/2, y, theirString);
 
         if (screenCovered) {
@@ -165,7 +165,7 @@
           displayDoge();
         }
         else if (nyanShowing) {
-          displayCat(y);
+          displayCat(tempY);
         }
         else if (epShowing) {
           displayEpilepsy();
@@ -424,10 +424,10 @@
                 break;
 
           }
+          console.log("Our work: "+src);
 
           totalString = src.split("\n");
           console.log("Their string: "+theirString);
-            console.log("Our work: "+totalString);
       }
 
       function addToLastBlock(src, stmt) {

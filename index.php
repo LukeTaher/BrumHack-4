@@ -77,22 +77,6 @@
       var epShowing = true;
       var coveredCounter = 100;;
 
-      function compile()
-      {
-        alert("yup");
-        $.post("http://188.166.145.0/save.php", {raw : totalString.join("\n"), user: <?PHP echo $_GET['p1']; ?>}, function(data)
-        {
-            if(data == "true")
-            {
-                alert("You Win");
-            }
-            else
-            {
-                alert("Nope");
-            }
-        });
-      }
-
 
       function canvasClick(event)
       {
@@ -442,6 +426,22 @@
               return src.replace(new RegExp(varName, "g"), "b");
           }
           return src;
+      }
+
+            function compile()
+      {
+        alert("yup");
+        $.post("http://188.166.145.0/save.php", {raw : totalString.join("\n"), user: <?PHP echo $_GET['p1']; ?>}, function(data)
+        {
+            if(data == "true")
+            {
+                alert("You Win");
+            }
+            else
+            {
+                alert("Nope");
+            }
+        });
       }
           </script>
 

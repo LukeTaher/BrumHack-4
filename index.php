@@ -121,6 +121,7 @@
       var gifX = 0;
       var gifY = 0;
       var gifTheta = 0;
+      hideAll();
 
       function game(){
 

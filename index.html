@@ -206,7 +206,7 @@
           sendSource(totalString.join("\n"), thisUser, otherUser, applyDisruptions);
       }, 1000);
 
-      // Appl the disruptions from the server to the source code
+      // Apply the disruptions from the server to the source code
       function applyDisruptions(str) {
           var json = JSON.parse(str);
           var src = json[0];

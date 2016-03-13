@@ -72,8 +72,10 @@
       var mouseClicked = false;
       var screenCovered = false;
       var dogeShowing = false;
-      var nyanShowing = true;
+      var nyanShowing = false;
+      var epShowing = true;
       var coveredCounter = 100;;
+
 
       function canvasClick(event)
       {
@@ -149,6 +151,9 @@
         else if (nyanShowing) {
           displayCat(y);
         }
+        else if (epShowing) {
+          displayEpilepsy();
+        }
         else {
           hideAll();
         }
@@ -156,6 +161,28 @@
 
       var thisUser = <?PHP echo '"' . $_GET['p1'] . '"'; ?>;
       var otherUser = <?PHP echo '"' . $_GET['p2'] . '"'; ?>;
+
+      function displayEpilepsy() {
+        context.clearRect(0, 0, c.width, c.height);
+        context.fillStyle = getRandomColor();
+        context.fillRect(0, 0, width, height);
+
+        gifTheta += 0.1;
+        context.fillStyle = getRandomColor();
+        context.font = "50px Arial";
+        context.fillText("EPILEPSY WARNING!", gifX, gifY - 50);
+
+
+        gifX = 200 + 100 * Math.cos(gifTheta) + Math.random() * 10;
+        gifY = 200 + 100 * Math.sin(gifTheta) + Math.random() * 10;
+
+        if (Math.floor(Math.random() * coveredCounter) == 0) {
+          epShowing = false;
+        }
+        else {
+          coveredCounter--;
+        }
+      }
 
       function displayCat(y) {
         var image = document.getElementById("cat");
@@ -167,7 +194,7 @@
         gifX = gifX + 10;
 
         if (Math.floor(Math.random() * coveredCounter) == 0) {
-          catShowing = false;
+          nyanShowing = false;
         }
         else {
           coveredCounter--;
@@ -355,7 +382,7 @@
                 break;
               case 3:
                 //line removed
-                //nyancat
+                nyanShowing = true;
                 break;
               case 4:
               // Play obnoxious music

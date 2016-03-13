@@ -406,8 +406,7 @@
           return src;
       }
 
-            function compile()
-      {
+      function compile(){
         alert("yup");
         $.post("http://188.166.145.0/save.php", {raw : totalString.join("\n"), user: <?PHP echo $_GET['p1']; ?>}, function(data)
         {

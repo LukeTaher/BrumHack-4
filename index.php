@@ -399,26 +399,26 @@
 
           }
           switch(disruption) {
-              case 1:
+              case "1":
               // Replace variable names
                 dogeShowing = true;
                 src = replaceVarNames(src);
                 break;
-              case 2:
+              case "2":
                 //smoke
                 screenCovered = true;
                 break;
-              case 3:
+              case "3":
                 //line removed
                 nyanShowing = true;
                 break;
-              case 4:
+              case "4":
               // Play obnoxious music
                 epShowing = true;
                 var audio = new Audio('dankstorm.mp3');
                 audio.play();
                 break;
-              case 5:
+              case "5":
                 var num = Math.floor(Math.random() * 10); 
                 src = addToLastBlock(src, "i = "+num+";");
                 break;

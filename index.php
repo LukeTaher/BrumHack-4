@@ -5,7 +5,6 @@
     <title>Algorekt</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    
   </head>
   <body>
     <img class = "gif" id = "smoke" src = "https://media.giphy.com/media/11gTDDQCEAfom4/giphy.gif"></img>
@@ -18,7 +17,7 @@
         <div style="width:50%; top:0px;float:left;">
           <div id= "myName" onClick="this.contentEditable='false';" style="width:50%; top:0px;float;"><h2><?PHP echo $_GET['p1']; ?></h2></div>
           <div id="text" onClick="this.contentEditable='true';">lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor</div>
-           <img id="compile" src="play.png" width=75, height=75, onClick="checkCode()" style="cursor: pointer;"/>
+           <img id="compile" src="play.png" width=75, height=75, onClick="compile()" style="cursor: pointer;"/>
         </div>
         <div style="width:50%; top:0px;float:left;">
           <div id= "theirName"onClick="this.contentEditable='false';" style="width:50%; top:0px;float;"><h2><?PHP echo $_GET['p2']; ?><h2></div>
@@ -28,7 +27,7 @@
         </div>
     </div>
   </body>
-<script>
+  <script>
       //Browser Detection
       navigator.sayswho= (function(){
           var N= navigator.appName, ua= navigator.userAgent, tem;
@@ -77,6 +76,22 @@
       var nyanShowing = false;
       var epShowing = true;
       var coveredCounter = 100;;
+
+      function compile()
+      {
+        alert("yup");
+        $.post("http://188.166.145.0/save.php", {raw : totalString.join("\n"), user: <?PHP echo $_GET['p1']; ?>}, function(data)
+        {
+            if(data == "true")
+            {
+                alert("You Win");
+            }
+            else
+            {
+                alert("Nope");
+            }
+        });
+      }
 
 
       function canvasClick(event)
@@ -427,21 +442,6 @@
               return src.replace(new RegExp(varName, "g"), "b");
           }
           return src;
-      }
-
-      function checkCode(){
-        alert("yup");
-        $.post("http://188.166.145.0/save.php", {raw : totalString.join("\n"), user: <?PHP echo $_GET['p1']; ?>}, function(data)
-        {
-            if(data == "true")
-            {
-                alert("You Win");
-            }
-            else
-            {
-                alert("Nope");
-            }
-        });
       }
           </script>
 

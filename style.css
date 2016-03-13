@@ -15,4 +15,7 @@ body {
     -o-transform: rotate(270deg);
     -ms-transform: rotate(270deg);
     transform: rotate(270deg);
+    width: 50%;
+    height: 90%;
 }
+

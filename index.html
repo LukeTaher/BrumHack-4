@@ -8,8 +8,9 @@
   </head>
   <body>
     <img class = "gif" id = "smoke" src = "https://media.giphy.com/media/11gTDDQCEAfom4/giphy.gif"></img>
+
     <img class = "gif" id = "snoop" src = "https://media.giphy.com/media/O0Xo8Tpk5QxTW/giphy.gif"></img>
-    <!--<img class = "gif" id = "doge" src = "https://media.giphy.com/media/1XqJuLSmrZPhe/giphy.gif"></img> -->
+    <img class = "gif" id = "doge" src = "https://media.giphy.com/media/1XqJuLSmrZPhe/giphy.gif"></img>
     <canvas id="myCanvas" width="800" height="200" style="border:1px solid #000000;">
     </canvas>
 
@@ -57,6 +58,8 @@
 
       var pos = 0;
       var mouseClicked = false;
+      var screenCovered = true;
+      var coveredCounter = 100;;
 
       function canvasClick(event)
       {
@@ -108,6 +111,7 @@
       var gifTheta = 0;
 
       function game(){
+
         context.clearRect(0, 0, c.width, c.height);
         context.fillStyle = '#f2f2f2';
         context.fillRect(0, 0, width, height);
@@ -122,12 +126,30 @@
         drawText(x, y, totalString);
         drawText(x+width/2, y, theirString);
 
-        var image = document.getElementById("snoop");
+        if (screenCovered) {
+          displaySmoke();
+        }
+        else {
+          hideSmoke();
+        }
+      }
+
+      var thisUser = "Gary";
+      var otherUser = "Steve";
+
+      function displaySmoke() {
+        $("#snoop").show();
+        $("#smoke").show();
+        var image = document.getElementById("smoke");
+        var newX = 0;
+
 
 
         image.style.position = "absolute";
-        image.style.top = x;
-        image.style.left = y;
+        image.style.top = height;
+        image.style.left = newX;
+
+
         //image.style.width = 100 + Math.cos(theta) * 100;
 
         gifTheta += 0.1;
@@ -138,12 +160,28 @@
 
 
         gifX = 200 + 100 * Math.cos(gifTheta) + Math.random() * 10;
-        gifY = 200 + 100 * Math.sin(gifTheta) + Math.random() * 10;;
+        gifY = 200 + 100 * Math.sin(gifTheta) + Math.random() * 10;
 
+        var image = document.getElementById("snoop");
+        image.style.position = "absolute";
+        image.style.top = gifX;
+        image.style.left = gifY;
+
+        gifX = 200 + 100 * Math.cos(gifTheta) + Math.random() * 10;
+        gifY = 200 + 100 * Math.sin(gifTheta) + Math.random() * 10;
+        if (Math.floor(Math.random() * coveredCounter) == 0) {
+          screenCovered = false;
+        }
+        else {
+          coveredCounter--;
+        }
       }
 
-      var thisUser = "Gary";
-      var otherUser = "Steve";
+      function hideSmoke() {
+        $("#snoop").hide();
+        $("#smoke").hide();
+        coveredCounter = 100;
+      }
 
       function drawText(x, y, stringArray) {
         var lineheight = 18;
@@ -191,7 +229,7 @@
       function sendRequest(data, callback) {
           $.ajax({
               type: "POST",
-              url: "http://188.166.145.0/test.html",
+              url: "http://188.166.145.0/nextMove.php",
               data: data,
               success: callback
           });
@@ -246,14 +284,17 @@
                 src = replaceVarNames(src);
                 break;
               case 2:
-                // cover screen
+                screenCovered = true;
+
               case 4:
               // Play obnoxious music
                 var audio = new Audio('dankstorm.mp3');
                 audio.play();
                 break;
               case 5:
-                // i = random number
+                var num = Math.floor(Math.random() * 10); 
+                src = addToLastBlock(src, "i = "+num+";");
+
           }
 
           switch(opponentDisruption) {
@@ -261,18 +302,27 @@
                 opponentSrc = replaceVarNames(opponentSrc);
                 break;
               case 5:
-                // i = 0
+                opponentSrc = addToLastBlock(opponentSrc, "i = 0;");
           }
 
           totalString = src.split("\n");
           totalString2 = opponentSrc.split("\n");
       }
 
+      function addToLastBlock(src, stmt) {
+          var index = src.lastIndexOf('}');
+          if(index < 0) return src;
+          var preBracket = src.substring(0, index);
+          return preBracket + stmt + src.substring(index, src.length);
+      }
+
       function replaceVarNames(src) {
-          var varDec = src.match("[a-zA-Z]+ [a-zA-Z]+ = .+").split(" ");
-          var varName = varDec[1];
+          var varDecs = src.match("[a-zA-Z]+ [a-zA-Z]+ = .+")
+          if(varDecs.length == 0) return src;
+          // Get a random variable name
+          var varName = varDecs[Math.random() * varDecs.length].split(" ")[1];
           if(varName != "") {
-              return src.replace(varName, "denkMames");
+              return src.replace(new RegExp(varName, "g"), "b");
           }
           return src;
       }

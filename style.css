@@ -4,3 +4,26 @@ body {
     color: #444;
     padding: 0px 10px;
 }
+.gif {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#doge{
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+#smoke {
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+    width: 50%;
+    height: 90%;
+}
+#compile {
+    
+}

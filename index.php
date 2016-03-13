@@ -8,19 +8,19 @@
   </head>
   <body>
     <img class = "gif" id = "smoke" src = "https://media.giphy.com/media/11gTDDQCEAfom4/giphy.gif"></img>
-
+    <img class = "gif" id = "cat" src = "http://vignette3.wikia.nocookie.net/clashofclans/images/3/30/NYAN_CAT.gif/revision/latest?cb=20150415221840"></img>
     <img class = "gif" id = "snoop" src = "https://media.giphy.com/media/O0Xo8Tpk5QxTW/giphy.gif"></img>
-<!--    <img class = "gif" id = "doge" src = "https://media.giphy.com/media/1XqJuLSmrZPhe/giphy.gif"></img> -->
+    <img class = "gif" id = "doge" src = "https://media.giphy.com/media/1XqJuLSmrZPhe/giphy.gif"></img>
     <canvas id="myCanvas" width="800" height="200" style="border:1px solid #000000;">
     </canvas>
      <div style="width:100%">
         <div style="width:50%; top:0px;float:left;">
-          <div id= "myName" onClick="this.contentEditable='false';" style="width:50%; top:0px;float;"><h2>Gary</h2></div>
+          <div id= "myName" onClick="this.contentEditable='false';" style="width:50%; top:0px;float;"><h2><?PHP echo $_GET['p1']; ?></h2></div>
           <div id="text" onClick="this.contentEditable='true';">lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor</div>
-          <img id="compile" src="play.png" width=100, height=100, onClick="compile()"/>
+           <img id="compile" src="play.png" width=75, height=75, onClick="checkPass()" style="cursor: pointer;"/>
         </div>
         <div style="width:50%; top:0px;float:left;">
-          <div id= "theirName"onClick="this.contentEditable='false';" style="width:50%; top:0px;float;"><h2>Steve<h2></div>
+          <div id= "theirName"onClick="this.contentEditable='false';" style="width:50%; top:0px;float;"><h2><?PHP echo $_GET['p2']; ?><h2></div>
           <div id="theirText" onClick="this.contentEditable='false';">
             lorem ipsum dolor lorem ipsum dolorlorem ipsum dolor
           </div>
@@ -72,8 +72,26 @@
       var pos = 0;
       var mouseClicked = false;
       var screenCovered = false;
-      var dogeShowing = true;
+      var dogeShowing = false;
+      var nyanShowing = false;
+      var epShowing = false;
       var coveredCounter = 100;;
+
+      function checkPass()
+      {
+        $.post("http://188.166.145.0/run.php", {raw : totalString.join("\n"), user : <?PHP echo '"' . $_GET['p1'] . '"'; ?> }, function(data)
+        {
+            if(data == "true")
+            {
+                alert("You Win");
+            }
+            else
+            {
+                alert("Nope");
+            }
+        });
+      }
+
 
       function canvasClick(event)
       {
@@ -112,17 +130,17 @@
         }
       }
 
-      var totalString = [], totalString2 = [];
+      var totalString = [];
       totalString.push("public static int[] sort(int[] array) {");
       var highlights = ["boolean", "byte", "char", "double", "float","int","long","short",
         "String", "if", "while", "for", "break", "else", "switch", "case", "true", "false", "(int"];
       var theirString = [];
       theirString.push("public static int[] sort(int[] a) {");
-      theirString.push("int i = 0;");
 
       var gifX = 0;
       var gifY = 0;
       var gifTheta = 0;
+      hideAll();
 
       function game(){
 
@@ -137,7 +155,7 @@
         context.fillText(totalString[0], x+width/2, y);
         context.font = "15px Arial";
         y += 5;
-        drawText(x, y, totalString);
+        var tempY = drawText(x, y, totalString);
         drawText(x+width/2, y, theirString);
 
         if (screenCovered) {
@@ -146,34 +164,77 @@
         else if (dogeShowing) {
           displayDoge();
         }
+        else if (nyanShowing) {
+          displayCat(tempY);
+        }
+        else if (epShowing) {
+          displayEpilepsy();
+        }
         else {
           hideAll();
         }
       }
 
-      var thisUser = "Gary";
-      var otherUser = "Steve";
+      var thisUser = <?PHP echo '"' . $_GET['p1'] . '"'; ?>;
+      var otherUser = <?PHP echo '"' . $_GET['p2'] . '"'; ?>;
 
-      function displayDoge() {
-        $("#doge").show();
-        var image = document.getElementById("gif");
-        var x = 0;
-        var y = 0;
-        var theta = 0;
+      function displayEpilepsy() {
+        context.clearRect(0, 0, c.width, c.height);
+        context.fillStyle = getRandomColor();
+        context.fillRect(0, 0, width, height);
 
-        image.style.position = "absolute";
-        image.style.top = x;
-        image.style.left = y;
-        //image.style.width = 100 + Math.cos(theta) * 100;
-
-        theta += 0.1;
+        gifTheta += 0.1;
         context.fillStyle = getRandomColor();
         context.font = "50px Arial";
-        context.fillText("EPILEPSY WARNING!", x, y - 50);
+        context.fillText("EPILEPSY WARNING!", gifX, gifY - 50);
 
 
-        x = 200 + 100 * Math.cos(theta) + Math.random() * 10;
-        y = 200 + 100 * Math.sin(theta) + Math.random() * 10;;
+        gifX = 200 + 100 * Math.cos(gifTheta) + Math.random() * 10;
+        gifY = 200 + 100 * Math.sin(gifTheta) + Math.random() * 10;
+
+        if (Math.floor(Math.random() * coveredCounter) == 0) {
+          epShowing = false;
+        }
+        else {
+          coveredCounter -= 2;
+        }
+      }
+
+      function displayCat(y) {
+        var image = document.getElementById("cat");
+        image.style.width = "200px";
+        image.style.height = "20px";
+
+
+        context.drawImage(image,gifX, y-15+Math.floor(Math.random()*10));
+        gifX = gifX + 10;
+
+        if (Math.floor(Math.random() * coveredCounter) == 0) {
+          nyanShowing = false;
+        }
+        else {
+          coveredCounter--;
+        }
+      }
+
+      function displayDoge() {
+        var image = document.getElementById("doge");
+        context.drawImage(image,gifX, gifY);
+
+        gifTheta += 0.1;
+        context.fillStyle = getRandomColor();
+        context.font = "50px Comic Sans MS";
+        context.fillText("EPILEPSY WARNING!", gifX, gifY - 50);
+
+        context.fillText("wow", gifX, 50);
+        context.fillText("much code",500, 100);
+        context.fillText("very skill", 200, gifY);
+        context.fillText("wow", 400, 200);
+        context.fillText("such java", 800, 400);
+
+
+        gifX = 200 + 100 * Math.cos(gifTheta) + Math.random() * 10;
+        gifY = 200 + 100 * Math.sin(gifTheta) + Math.random() * 10;
 
         if (Math.floor(Math.random() * coveredCounter) == 0) {
           dogeShowing = false;
@@ -189,14 +250,9 @@
         var image = document.getElementById("smoke");
         var newX = 0;
 
-
-
         image.style.position = "absolute";
         image.style.top = height;
         image.style.left = newX;
-
-
-        //image.style.width = 100 + Math.cos(theta) * 100;
 
         gifTheta += 0.1;
         context.fillStyle = getRandomColor();
@@ -226,8 +282,12 @@
       function hideAll() {
         $("#snoop").hide();
         $("#smoke").hide();
-        $("#doge").show();
-        coveredCounter = 100;
+        $("#doge").hide();
+        $("#cat").hide();
+        coveredCounter = 300;
+        gifX = 0;
+        gifY = 0;
+        gifTheta = 0;
       }
 
       function drawText(x, y, stringArray) {
@@ -247,6 +307,7 @@
             xVal += context.measureText(words[j]+" ").width;
           }
         }
+        return y + stringArray.length*lineheight;
       }
 
         function Vector(x, y) {
@@ -323,37 +384,50 @@
           var src = json[0];
           var disruption = json[1];
           var opponent = json[2];
-          var opponentSrc = opponent[0];
-          var opponentDisruption = opponent[1];
+          if (opponent[0] != null) {
+            var opponentSrc = opponent[0];
+            var opponentDisruption = opponent[1];
+            switch(opponentDisruption) {
+              case 1:
+                opponentSrc = replaceVarNames(opponentSrc);
+                break;
+              case 5:
+                opponentSrc = addToLastBlock(opponentSrc, "i = 0;");
+            }
+            theirString = opponentSrc.split("\n");
+            
+
+          }
           switch(disruption) {
               case 1:
               // Replace variable names
+                dogeShowing = true;
                 src = replaceVarNames(src);
                 break;
               case 2:
+                //smoke
                 screenCovered = true;
-
+                break;
+              case 3:
+                //line removed
+                nyanShowing = true;
+                break;
               case 4:
               // Play obnoxious music
+                epShowing = true;
                 var audio = new Audio('dankstorm.mp3');
                 audio.play();
                 break;
               case 5:
                 var num = Math.floor(Math.random() * 10); 
                 src = addToLastBlock(src, "i = "+num+";");
-
-          }
-
-          switch(opponentDisruption) {
-              case 1:
-                opponentSrc = replaceVarNames(opponentSrc);
                 break;
-              case 5:
-                opponentSrc = addToLastBlock(opponentSrc, "i = 0;");
+
           }
+          console.log("Our work: "+src);
 
           totalString = src.split("\n");
-          totalString2 = opponentSrc.split("\n");
+          console.log("Their string: "+theirString);
       }
 
       function addToLastBlock(src, stmt) {

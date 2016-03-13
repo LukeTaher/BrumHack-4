@@ -167,6 +167,12 @@
         context.font = "50px Arial";
         context.fillText("EPILEPSY WARNING!", gifX, gifY - 50);
 
+        context.fillText("wow", 100, 50);
+        context.fillText("much code",500, 100);
+        context.fillText("very skill", 200, gifY);
+        context.fillText("wow", 400, 200);
+        context.fillText("such java", 800, 400);
+
 
         gifX = 200 + 100 * Math.cos(gifTheta) + Math.random() * 10;
         gifY = 200 + 100 * Math.sin(gifTheta) + Math.random() * 10;
@@ -190,6 +196,8 @@
         image.style.position = "absolute";
         image.style.top = height;
         image.style.left = newX;
+
+
 
 
         //image.style.width = 100 + Math.cos(theta) * 100;

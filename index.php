@@ -395,6 +395,7 @@
                 opponentSrc = addToLastBlock(opponentSrc, "i = 0;");
             }
             theirString = opponentSrc.split("\n");
+            
 
           }
           switch(disruption) {
@@ -425,6 +426,8 @@
           }
 
           totalString = src.split("\n");
+          console.log("Their string: "+theirString);
+            console.log("Our work: "+totalString);
       }
 
       function addToLastBlock(src, stmt) {

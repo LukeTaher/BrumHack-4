@@ -156,7 +156,9 @@
       function displayDoge() {
         $("#doge").show();
         var image = document.getElementById("doge");
-
+        var x = 0;
+        var y = 0;
+        var theta = 0;
         image.style.position = "absolute";
         image.style.top = x;
         image.style.left = y;

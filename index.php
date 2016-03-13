@@ -10,7 +10,7 @@
     <img class = "gif" id = "smoke" src = "https://media.giphy.com/media/11gTDDQCEAfom4/giphy.gif"></img>
 
     <img class = "gif" id = "snoop" src = "https://media.giphy.com/media/O0Xo8Tpk5QxTW/giphy.gif"></img>
-<!--    <img class = "gif" id = "doge" src = "https://media.giphy.com/media/1XqJuLSmrZPhe/giphy.gif"></img> -->
+    <img class = "gif" id = "doge" src = "https://media.giphy.com/media/1XqJuLSmrZPhe/giphy.gif"></img>
     <canvas id="myCanvas" width="800" height="200" style="border:1px solid #000000;">
     </canvas>
      <div style="width:100%">
@@ -157,7 +157,7 @@
         image.style.position = "absolute";
         image.style.top = x;
         image.style.left = y;
-        //image.style.width = 100 + Math.cos(theta) * 100;
+        image.style.width = 100 + Math.cos(theta) * 100;
 
         theta += 0.1;
         context.fillStyle = getRandomColor();

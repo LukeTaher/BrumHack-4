@@ -71,7 +71,7 @@
       var pos = 0;
       var mouseClicked = false;
       var screenCovered = false;
-      var dogeShowing = false;
+      var dogeShowing = true;
       var coveredCounter = 100;;
 
       function canvasClick(event)
@@ -142,6 +142,9 @@
         if (screenCovered) {
           displaySmoke();
         }
+        else if (dogeShowing) {
+          displayDoge();
+        }
         else {
           hideAll();
         }
@@ -153,6 +156,9 @@
       function displayDoge() {
         $("#doge").show();
         var image = document.getElementById("gif");
+        var x = 0;
+        var y = 0;
+        var theta = 0;
 
         image.style.position = "absolute";
         image.style.top = x;
@@ -167,6 +173,13 @@
 
         x = 200 + 100 * Math.cos(theta) + Math.random() * 10;
         y = 200 + 100 * Math.sin(theta) + Math.random() * 10;;
+
+        if (Math.floor(Math.random() * coveredCounter) == 0) {
+          dogeShowing = false;
+        }
+        else {
+          coveredCounter--;
+        }
       }
 
       function displaySmoke() {
